@@ -1,8 +1,9 @@
 {
   "name": "Auto Greeting Generator",
-  "author": "you",
-  "version": "1.3.0",
-  "description": "Auto greeting with addon prompt",
+  "author": "YourName",
+  "version": "1.4.0",
+  "description": "Generate first message greetings with addon prompts",
   "entry": "index.js",
-  "settings": "settings.html"
+  "settings": "settings.html",
+  "run": true  
 }

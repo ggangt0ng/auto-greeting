@@ -3,9 +3,6 @@ import { eventSource } from "../../../scripts/events.js";
 import { generate } from "../../../scripts/generate.js";
 import { addOneMessage } from "../../../scripts/chat.js";
 
-/* =========================
-   상태
-========================= */
 let customAddonPrompt = "";
 let autoEnabled = true;
 let hasGenerated = false;
@@ -43,10 +40,7 @@ async function generateGreeting() {
     const context = getContext();
     const prompt = buildPrompt(context);
 
-    const result = await generate({
-        prompt: prompt
-    });
-
+    const result = await generate({ prompt });
     return result;
 }
 
@@ -65,7 +59,7 @@ async function insertGreeting() {
 }
 
 /* =========================
-   UI 이벤트 연결
+   settings.html UI 연결
 ========================= */
 function setupUI() {
     const promptBox = document.getElementById("ag-prompt");
@@ -90,7 +84,7 @@ function setupUI() {
 }
 
 /* =========================
-   이벤트
+   이벤트 자동 실행
 ========================= */
 eventSource.on("CHAT_CHANGED", async () => {
     if (!autoEnabled) return;
@@ -105,8 +99,11 @@ eventSource.on("CHAT_CREATED", () => {
 });
 
 /* =========================
-   settings.html 로드 감지
+   초기화 / 마술봉용 init
 ========================= */
-document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(setupUI, 500);
-});
+export function init() {
+    // DOM 로드 후 UI 연결
+    document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(setupUI, 500);
+    });
+}
